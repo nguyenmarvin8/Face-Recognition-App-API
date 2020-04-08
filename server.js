@@ -12,8 +12,12 @@ const image = require('./controllers/image');
 const db = knex({
     client: 'pg',
     connection: {
-      connectionString: process.env.DATABASE_URL,
-      ssl: true,
+      host: 'postgresql-pointy-39811',
+      user: '',
+      password: '',
+      database: 'facerecognition'
+      // connectionString: process.env.DATABASE_URL,
+      // ssl: true,
     } 
 });
 
@@ -26,7 +30,7 @@ app.use(bodyParser.json());
 //   res.send(database.users);
 // })
 
-app.get('/', (req, res) => { res.send(db.users) })
+app.get('/', (req, res) => { res.send('it is working') })
 app.post('/signin', signin.handleSignin(db, bcrypt))
 app.post('/register', (req, res) => { register.handleRegister(req, res, db, bcrypt) })
 app.get('/profile/:id', (req, res) => { profile.handleProfileGet(req, res, db)})
